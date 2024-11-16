@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "../components/ui/button";
+import { Button } from "./ui/button";
 import {
   Card,
   CardContent,
@@ -9,17 +9,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../components/ui/card";
-import { Input } from "../components/ui/input";
+} from "./ui/card";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../components/ui/select";
-import { Label } from "./ui/label";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group.tsx";
+} from "./ui/select";
 
 export default function OnboardingWizard() {
   const [step, setStep] = useState(1);
@@ -57,7 +56,7 @@ export default function OnboardingWizard() {
   };
 
   return (
-    <Card className="w-[550px]">
+    <Card className="w-[550px] mx-auto">
       <CardHeader>
         <CardTitle>Asterisk Daily Check</CardTitle>
         <CardDescription>Step {step} of 4</CardDescription>
@@ -111,28 +110,34 @@ export default function OnboardingWizard() {
 
         {step === 2 && (
           <div className="space-y-4">
-            <Label>Company Size</Label>
-            <RadioGroup
-              value={formData.companySize}
-              onValueChange={(value) => updateFormData("companySize", value)}
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="1-10" id="r1" />
-                <Label htmlFor="r1">1-10 employees</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="11-50" id="r2" />
-                <Label htmlFor="r2">11-50 employees</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="51-200" id="r3" />
-                <Label htmlFor="r3">51-200 employees</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="201+" id="r4" />
-                <Label htmlFor="r4">201+ employees</Label>
-              </div>
-            </RadioGroup>
+            <div className="space-y-2">
+              <Label>Do you have any existing health conditions?</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="List everything — I’m not shy!"
+                value={formData.email}
+                onChange={(e) => updateFormData("email", e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="name">what should I call you? </Label>
+              <Input
+                id="name"
+                placeholder="Enter your full name"
+                value={formData.name}
+                onChange={(e) => updateFormData("name", e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="name">what should I call you? </Label>
+              <Input
+                id="name"
+                placeholder="Enter your full name"
+                value={formData.name}
+                onChange={(e) => updateFormData("name", e.target.value)}
+              />
+            </div>
           </div>
         )}
         {step === 3 && (
