@@ -79,7 +79,7 @@ export default function OnboardingWizard() {
               <Input
                 id="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Enter your age"
                 value={formData.email}
                 onChange={(e) => updateFormData("email", e.target.value)}
               />
@@ -89,7 +89,7 @@ export default function OnboardingWizard() {
               <Input
                 id="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Enter your ethnicity"
                 value={formData.email}
                 onChange={(e) => updateFormData("email", e.target.value)}
               />
@@ -101,7 +101,7 @@ export default function OnboardingWizard() {
               <Input
                 id="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Enter your location"
                 value={formData.email}
                 onChange={(e) => updateFormData("email", e.target.value)}
               />
