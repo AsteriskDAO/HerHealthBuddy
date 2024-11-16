@@ -1,74 +1,109 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Button } from "../components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
-import { Input } from "../components/ui/input"
-import { Label } from "./ui/label"
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group.tsx"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
+import { useState } from "react";
+import { Button } from "../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select";
+import { Label } from "./ui/label";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group.tsx";
 
 export default function OnboardingWizard() {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    companySize: '',
-    industry: '',
-    useCase: ''
-  })
+    name: "",
+    email: "",
+    companySize: "",
+    industry: "",
+    useCase: "",
+  });
 
   const updateFormData = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleNext = () => {
-    if (step < 4) setStep(step + 1)
-  }
+    if (step < 4) setStep(step + 1);
+  };
 
   const handlePrevious = () => {
-    if (step > 1) setStep(step - 1)
-  }
+    if (step > 1) setStep(step - 1);
+  };
 
   const isStepComplete = () => {
     switch (step) {
       case 1:
-        return formData.name && formData.email
+        return formData.name && formData.email;
       case 2:
-        return formData.companySize
+        return formData.companySize;
       case 3:
-        return formData.industry && formData.useCase
+        return formData.industry && formData.useCase;
       default:
-        return true
+        return true;
     }
-  }
+  };
 
   return (
     <Card className="w-[550px]">
       <CardHeader>
-        <CardTitle>SaaS Onboarding</CardTitle>
+        <CardTitle>Asterisk Daily Check</CardTitle>
         <CardDescription>Step {step} of 4</CardDescription>
       </CardHeader>
       <CardContent>
         {step === 1 && (
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
+              <Label htmlFor="name">what should I call you? </Label>
               <Input
                 id="name"
                 placeholder="Enter your full name"
                 value={formData.name}
-                onChange={(e) => updateFormData('name', e.target.value)}
+                onChange={(e) => updateFormData("name", e.target.value)}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">And how old are you? </Label>
               <Input
                 id="email"
                 type="email"
                 placeholder="Enter your email"
                 value={formData.email}
-                onChange={(e) => updateFormData('email', e.target.value)}
+                onChange={(e) => updateFormData("email", e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">What’s your ethnicity? </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={(e) => updateFormData("email", e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">
+                And where in the world do you live?{" "}
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={(e) => updateFormData("email", e.target.value)}
               />
             </div>
           </div>
@@ -77,7 +112,10 @@ export default function OnboardingWizard() {
         {step === 2 && (
           <div className="space-y-4">
             <Label>Company Size</Label>
-            <RadioGroup value={formData.companySize} onValueChange={(value) => updateFormData('companySize', value)}>
+            <RadioGroup
+              value={formData.companySize}
+              onValueChange={(value) => updateFormData("companySize", value)}
+            >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="1-10" id="r1" />
                 <Label htmlFor="r1">1-10 employees</Label>
@@ -97,11 +135,14 @@ export default function OnboardingWizard() {
             </RadioGroup>
           </div>
         )}
-{step === 3 && (
+        {step === 3 && (
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="industry">Industry</Label>
-              <Select value={formData.industry} onValueChange={(value) => updateFormData('industry', value)}>
+              <Select
+                value={formData.industry}
+                onValueChange={(value) => updateFormData("industry", value)}
+              >
                 <SelectTrigger id="industry">
                   <SelectValue placeholder="Select your industry" />
                 </SelectTrigger>
@@ -120,7 +161,7 @@ export default function OnboardingWizard() {
                 id="useCase"
                 placeholder="Describe your primary use case"
                 value={formData.useCase}
-                onChange={(e) => updateFormData('useCase', e.target.value)}
+                onChange={(e) => updateFormData("useCase", e.target.value)}
               />
             </div>
           </div>
@@ -129,22 +170,36 @@ export default function OnboardingWizard() {
         {step === 4 && (
           <div className="space-y-4">
             <h3 className="text-lg font-medium">Summary</h3>
-            <p><strong>Name:</strong> {formData.name}</p>
-            <p><strong>Email:</strong> {formData.email}</p>
-            <p><strong>Company Size:</strong> {formData.companySize}</p>
-            <p><strong>Industry:</strong> {formData.industry}</p>
-            <p><strong>Primary Use Case:</strong> {formData.useCase}</p>
+            <p>
+              <strong>Name:</strong> {formData.name}
+            </p>
+            <p>
+              <strong>Email:</strong> {formData.email}
+            </p>
+            <p>
+              <strong>Company Size:</strong> {formData.companySize}
+            </p>
+            <p>
+              <strong>Industry:</strong> {formData.industry}
+            </p>
+            <p>
+              <strong>Primary Use Case:</strong> {formData.useCase}
+            </p>
           </div>
         )}
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline" onClick={handlePrevious} disabled={step === 1}>
+        <Button
+          variant="outline"
+          onClick={handlePrevious}
+          disabled={step === 1}
+        >
           Previous
         </Button>
         <Button onClick={handleNext} disabled={step === 4 || !isStepComplete()}>
-          {step === 3 ? 'Finish' : 'Next'}
+          {step === 3 ? "Finish" : "Next"}
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }
