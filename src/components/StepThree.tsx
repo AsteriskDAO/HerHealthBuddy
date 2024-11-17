@@ -14,8 +14,12 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const formSchema = z.object({
-  healthCondition: z.string().min(2).max(50),
+  healthStatus: z.string().min(2).max(50),
+  doctorVisit: z.string().min(2).max(50),
+  updateMedications: z.string().min(2).max(50),
 });
+
+export type StepThreeFormSchema = z.infer<typeof formSchema>;
 
 interface StepThreeProps {
   handleSubmitData: (data: z.infer<typeof formSchema>) => void;
@@ -30,7 +34,9 @@ const StepThree: FunctionComponent<StepThreeProps> = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      healthCondition: "",
+      healthStatus: "",
+      doctorVisit: "",
+      updateMedications: "",
     },
   });
 
@@ -46,7 +52,7 @@ const StepThree: FunctionComponent<StepThreeProps> = ({
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="healthCondition"
+          name="healthStatus"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Hey, how is your health today? </FormLabel>
@@ -64,7 +70,7 @@ const StepThree: FunctionComponent<StepThreeProps> = ({
 
         <FormField
           control={form.control}
-          name="healthCondition"
+          name="doctorVisit"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Did you see a doctor today?</FormLabel>
@@ -79,7 +85,7 @@ const StepThree: FunctionComponent<StepThreeProps> = ({
 
         <FormField
           control={form.control}
-          name="healthCondition"
+          name="updateMedications"
           render={({ field }) => (
             <FormItem>
               <FormLabel>

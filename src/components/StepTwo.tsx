@@ -15,7 +15,11 @@ import { z } from "zod";
 
 const formSchema = z.object({
   healthCondition: z.string().min(2).max(50),
+  selfDiagnosed: z.string().min(2).max(50),
+  medications: z.string().min(2).max(50),
 });
+
+export type StepTwoFormSchema = z.infer<typeof formSchema>;
 
 interface StepTwoProps {
   handleSubmitData: (data: z.infer<typeof formSchema>) => void;
@@ -31,6 +35,8 @@ const StepTwo: FunctionComponent<StepTwoProps> = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       healthCondition: "",
+      selfDiagnosed: "",
+      medications: "",
     },
   });
 
@@ -64,7 +70,7 @@ const StepTwo: FunctionComponent<StepTwoProps> = ({
 
         <FormField
           control={form.control}
-          name="name"
+          name="selfDiagnosed"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Are any of these self-diagnosed?</FormLabel>
@@ -79,7 +85,7 @@ const StepTwo: FunctionComponent<StepTwoProps> = ({
 
         <FormField
           control={form.control}
-          name="name"
+          name="medications"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Are you taking any medications?</FormLabel>

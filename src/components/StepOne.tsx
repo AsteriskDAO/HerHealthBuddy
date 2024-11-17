@@ -13,12 +13,14 @@ import { FunctionComponent } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const formSchema = z.object({
+export const formSchema = z.object({
   name: z.string().min(2).max(50),
   age: z.string(),
   ethnicity: z.string().min(2).max(50),
   location: z.string().min(2).max(50),
 });
+
+export type StepOneFormSchema = z.infer<typeof formSchema>;
 
 interface StepOneProps {
   handleSubmitData: (data: z.infer<typeof formSchema>) => void;
