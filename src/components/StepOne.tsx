@@ -12,7 +12,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FunctionComponent } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import axios from "axios";
 
 export const formSchema = z.object({
   name: z.string().min(2).max(50),
