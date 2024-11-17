@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FunctionComponent } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import axios from "axios";
 
 export const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -31,7 +32,6 @@ const StepOne: FunctionComponent<StepOneProps> = ({
   handleSubmitData,
   handleBack,
 }) => {
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,11 +42,19 @@ const StepOne: FunctionComponent<StepOneProps> = ({
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-    handleSubmitData(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      //const response = await axios.post("/api/createFile", values);
+
+      //console.log(values);
+
+      //console.log("Server response:", response.data);
+
+      // Si es necesario, pasa los datos al siguiente paso
+      handleSubmitData(values);
+    } catch (error) {
+      console.error("Error submitting the form:", error);
+    }
   }
 
   return (
@@ -61,7 +69,6 @@ const StepOne: FunctionComponent<StepOneProps> = ({
               <FormControl>
                 <Input placeholder="Enter your full name" {...field} />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
@@ -76,7 +83,6 @@ const StepOne: FunctionComponent<StepOneProps> = ({
               <FormControl>
                 <Input placeholder="Enter your age" {...field} />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
@@ -91,7 +97,6 @@ const StepOne: FunctionComponent<StepOneProps> = ({
               <FormControl>
                 <Input placeholder="Enter your ethnicity" {...field} />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
@@ -106,7 +111,6 @@ const StepOne: FunctionComponent<StepOneProps> = ({
               <FormControl>
                 <Input placeholder="Enter your country" {...field} />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
