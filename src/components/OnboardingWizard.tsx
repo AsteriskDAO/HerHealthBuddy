@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import StepOne from "./StepOne";
+import StepThree from "./StepThree";
+import StepTwo from "./StepTwo";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -10,15 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
 
 export default function OnboardingWizard() {
   const [step, setStep] = useState(1);
@@ -55,6 +49,14 @@ export default function OnboardingWizard() {
     }
   };
 
+  const handleSubmitData = (data: any) => {
+    // Do something with the data
+    console.log({ stepData: data });
+
+    // Move to next step
+    handleNext();
+  };
+
   return (
     <Card className="w-[550px] mx-auto">
       <CardHeader>
@@ -63,84 +65,27 @@ export default function OnboardingWizard() {
       </CardHeader>
       <CardContent>
         {step === 1 && (
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">what should I call you? </Label>
-              <Input
-                id="name"
-                placeholder="Enter your full name"
-                value={formData.name}
-                onChange={(e) => updateFormData("name", e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">And how old are you? </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your age"
-                value={formData.email}
-                onChange={(e) => updateFormData("email", e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">What’s your ethnicity? </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your ethnicity"
-                value={formData.email}
-                onChange={(e) => updateFormData("email", e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">
-                And where in the world do you live?{" "}
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your location"
-                value={formData.email}
-                onChange={(e) => updateFormData("email", e.target.value)}
-              />
-            </div>
-          </div>
+          <StepOne
+            handleSubmitData={handleSubmitData}
+            handleBack={handlePrevious}
+          />
         )}
 
         {step === 2 && (
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Label>Do you have any existing health conditions?</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="List everything — I’m not shy!"
-                value={formData.email}
-                onChange={(e) => updateFormData("email", e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="name">what should I call you? </Label>
-              <Input
-                id="name"
-                placeholder="Enter your full name"
-                value={formData.name}
-                onChange={(e) => updateFormData("name", e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="name">what should I call you? </Label>
-              <Input
-                id="name"
-                placeholder="Enter your full name"
-                value={formData.name}
-                onChange={(e) => updateFormData("name", e.target.value)}
-              />
-            </div>
-          </div>
+          <StepTwo
+            handleSubmitData={handleSubmitData}
+            handleBack={handlePrevious}
+          />
         )}
+
         {step === 3 && (
+          <StepThree
+            handleSubmitData={handleSubmitData}
+            handleBack={handlePrevious}
+          />
+        )}
+
+        {/* {step === 3 && (
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="industry">Industry</Label>
@@ -170,7 +115,7 @@ export default function OnboardingWizard() {
               />
             </div>
           </div>
-        )}
+        )} */}
 
         {step === 4 && (
           <div className="space-y-4">
@@ -193,6 +138,7 @@ export default function OnboardingWizard() {
           </div>
         )}
       </CardContent>
+
       <CardFooter className="flex justify-between">
         <Button
           variant="outline"
