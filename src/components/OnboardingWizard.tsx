@@ -58,7 +58,7 @@ export default function OnboardingWizard() {
   };
 
   return (
-    <Card className="w-[550px] mx-auto">
+    <Card className="max-w-md mx-auto">
       <CardHeader>
         <CardTitle>Asterisk Daily Check</CardTitle>
         <CardDescription>Step {step} of 4</CardDescription>
